@@ -1,4 +1,6 @@
-import type { EventPayloads } from "./events/index.js";
+import type {
+} from "./events/core.js";
+import { PlatformEvents } from "./events/index.js";
 import type { SellerRuntimeConfig } from "./runtime.js";
 
 export type UserRole = string;
@@ -31,11 +33,11 @@ export type SessionSnapshot =
   | { status: "loading" }
   | { status: "anonymous" }
   | {
-      status: "authenticated";
-      user: SessionUser;
-      roles: readonly string[];
-      permissions: readonly string[];
-    };
+    status: "authenticated";
+    user: SessionUser;
+    roles: readonly string[];
+    permissions: readonly string[];
+  };
 
 export interface SessionApi {
   getSnapshot(): SessionSnapshot;
@@ -50,14 +52,6 @@ export interface SellerPlatform {
   readonly events: PlatformEvents;
   readonly navigation: PlatformNavigation;
   readonly config: Readonly<SellerRuntimeConfig>;
-}
-
-export interface PlatformEvents {
-  publish<K extends keyof EventPayloads>(type: K, payload: EventPayloads[K]): void;
-  subscribe<K extends keyof EventPayloads>(
-    type: K,
-    handler: (payload: EventPayloads[K]) => void,
-  ): () => void;
 }
 
 export interface PlatformNavigation {

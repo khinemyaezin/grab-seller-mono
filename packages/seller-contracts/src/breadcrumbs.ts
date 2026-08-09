@@ -1,11 +1,14 @@
-import { routeTree, type RouteNode } from "./routes.js";
+import { type RouteNode, routeTree } from "./routes.js";
 
 export type BreadcrumbItem = {
   label: string;
   to?: string;
 };
 
-export function matchShellBreadcrumbs(pathname: string, replacements?: Record<string, string | null>): BreadcrumbItem[] {
+export function matchShellBreadcrumbs(
+  pathname: string,
+  replacements?: Record<string, string | null>,
+): BreadcrumbItem[] {
   const segments = pathname.replace(/\/+$/, "").split("/").filter(Boolean);
   const crumbs: BreadcrumbItem[] = [];
   let children: RouteNode[] = routeTree;
@@ -35,7 +38,6 @@ export function matchShellBreadcrumbs(pathname: string, replacements?: Record<st
     if (label) {
       crumbs.push({ label, to: currentPath });
       children = match?.children ?? [];
-
     } else {
       crumbs.push({ label: humanize(segment), to: currentPath });
       children = [];
@@ -46,6 +48,7 @@ export function matchShellBreadcrumbs(pathname: string, replacements?: Record<st
   }
   return crumbs;
 }
+
 function humanize(segment: string): string {
   return segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }

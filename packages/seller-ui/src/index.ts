@@ -9,3 +9,4 @@ export { UserAvatarDetails } from "./components/layout/user-avatar-details.js";
 export { NotFoundPage } from "./components/layout/not-found.js";
 export { useShellBreadcrumb, useShellBreadcrumbSegment } from "./hooks/use-shell-breadcrumb.js";
 export { useDebounce } from "./hooks/use-debounce.js";
+export { matchShellBreadcrumbs } from "./lib/breadcrumbs.js";
