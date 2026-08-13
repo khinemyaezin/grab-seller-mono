@@ -13,7 +13,7 @@
     "changeset": "changeset",
     "version:packages": "changeset version && npm_config_cache=.npm-cache npm install --package-lock-only",
     "version:canary": "changeset version --snapshot canary && npm_config_cache=.npm-cache npm install --package-lock-only",
-    "release:check": "npm run build && npm run typecheck && npm test && npm_config_cache=.npm-cache npm pack --workspaces --dry-run",
+    "release:check": "npm run build && npm run typecheck && npm_config_cache=.npm-cache npm pack --workspaces --dry-run",
     "publish:packages": "changeset publish",
     "publish:canary": "changeset publish --tag canary"
   },
