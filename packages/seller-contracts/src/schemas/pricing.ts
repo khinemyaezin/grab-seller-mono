@@ -6,8 +6,7 @@ export const PricingPayloadSchema = {
   type: "object" as const,
   properties: {
     sku: {
-      type: "string" as const,
-      minLength: 1,
+      type: "string" as const
     },
     currencyCode: {
       type: "string" as const,
@@ -17,9 +16,13 @@ export const PricingPayloadSchema = {
     amount: {
       type: "number" as const,
       minimum: 0,
+      errorMessage: {
+        type: "Amount must be a number",
+        minimum: "Amount must be greater than or equal to 0",
+      }
     },
   },
-  required: ["sku", "currencyCode", "amount"],
+  required: ["currencyCode", "amount"],
   additionalProperties: false,
 };
 

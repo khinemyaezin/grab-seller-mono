@@ -1,4 +1,4 @@
-import { PricingPayload } from "../schemas";
+import { InventoryPayload, PricingPayload } from "../schemas";
 import { EventBusMeta, EventEnvelope, ExtensionFieldErrors } from "./core";
 
 export type ToastType = "success" | "error" | "info" | "warning";
@@ -24,6 +24,8 @@ export type ShellBreadcrumbPayload = {
 export type StateEventPayloads = {
     "extension:pricing:hydrate:v1": EventEnvelope<unknown>;
     "extension:pricing:updated:v1": EventEnvelope<PricingPayload>;
+    "extension:inventory:hydrate:v1": EventEnvelope<unknown>;
+    "extension:inventory:updated:v1": EventEnvelope<InventoryPayload>;
 }
 
 export type SignalEventPayloads = {
