@@ -9,10 +9,10 @@ export function useShellBreadcrumb(leaf: string | undefined) {
       return;
     }
 
-    platform?.events.publish("shell:breadcrumb:v1", { leaf });
+    platform?.events.emit("shell:breadcrumb:v1", { leaf });
 
     return () => {
-      platform?.events.publish("shell:breadcrumb:v1", { leaf: null });
+      platform?.events.emit("shell:breadcrumb:v1", { leaf: null });
     };
   }, [leaf]);
 }
@@ -22,10 +22,10 @@ export function useShellBreadcrumbSegment(segmentPath: string, label: string | u
   useEffect(() => {
     if (!label) return;
 
-    platform?.events.publish("shell:breadcrumb:v1", { segments: { [segmentPath]: label } });
+    platform?.events.emit("shell:breadcrumb:v1", { segments: { [segmentPath]: label } });
 
     return () => {
-      platform?.events.publish("shell:breadcrumb:v1", { segments: { [segmentPath]: null } });
+      platform?.events.emit("shell:breadcrumb:v1", { segments: { [segmentPath]: null } });
     };
   }, [segmentPath, label]);
 }
