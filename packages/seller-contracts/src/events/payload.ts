@@ -21,11 +21,22 @@ export type ShellBreadcrumbPayload = {
     segments?: Record<string, string | null>;
 };
 
+export type FormDirtyPayload = {
+    dirty: boolean;
+    label?: string;
+};
+
+export type FormSavedPayload = EventBusMeta & {
+    status: "success" | "failed";
+    error?: string;
+};
+
 export type StateEventPayloads = {
     "extension:pricing:hydrate:v1": EventEnvelope<unknown>;
     "extension:pricing:updated:v1": EventEnvelope<PricingPayload>;
     "extension:inventory:hydrate:v1": EventEnvelope<unknown>;
     "extension:inventory:updated:v1": EventEnvelope<InventoryPayload>;
+    "form:dirty:v1": EventEnvelope<FormDirtyPayload>;
 }
 
 export type SignalEventPayloads = {
@@ -41,6 +52,10 @@ export type SignalEventPayloads = {
 
     "extension:validate:v1": EventBusMeta;
     "extension:validated:v1": EventEnvelope<unknown> & { valid: boolean, errors?: ExtensionFieldErrors };
+
+    "form:save:v1": EventBusMeta;
+    "form:discard:v1": EventBusMeta;
+    "form:saved:v1": FormSavedPayload;
 }
 
 export type EventPayloads = StateEventPayloads & SignalEventPayloads;

@@ -11,3 +11,5 @@ export { useShellBreadcrumb, useShellBreadcrumbSegment } from "./hooks/use-shell
 export { useDebounce } from "./hooks/use-debounce.js";
 export { requestValidate, useValidateAllSlots, type SlotValidateResult } from "./hooks/use-slot-validation.js";
 export { matchShellBreadcrumbs } from "./lib/breadcrumbs.js";
+export { ContextBar, type ContextBarProps } from "./components/layout/context-bar.js";
+export { useContextBar, type UseContextBarOptions } from "./hooks/use-context-bar.js";
