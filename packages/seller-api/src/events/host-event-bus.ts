@@ -13,8 +13,8 @@ function correlationKey(payload: unknown): string | undefined {
   if (typeof record.entityKey === "string" && record.entityKey.length > 0) {
     return record.entityKey;
   }
-  if (typeof record.instanceId === "string" && record.instanceId.length > 0) {
-    return record.instanceId;
+  if (typeof record.groupId === "string" && record.groupId.length > 0) {
+    return record.groupId;
   }
   return undefined;
 }
@@ -156,11 +156,11 @@ export function createHostEventBus(): PlatformEvents {
       return;
     }
 
-    if ("instanceId" in scope) {
-      const { instanceId } = scope;
+    if ("groupId" in scope) {
+      const { groupId } = scope;
       for (const [storageKey, entry] of [...cache.entries()]) {
         const payload = entry.payload as Record<string, unknown>;
-        if (entry.key === instanceId || payload.instanceId === instanceId) {
+        if (entry.key === groupId || payload.groupId === groupId) {
           cache.delete(storageKey);
         }
       }

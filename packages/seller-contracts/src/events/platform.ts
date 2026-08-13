@@ -3,7 +3,7 @@ import { EventPayloads, SignalEventPayloads, StateEventPayloads } from "./payloa
 
 export type EventClearScope =
     | { topic: keyof StateEventPayloads; key?: string }
-    | { instanceId: string }
+    | { groupId: string }
     | { entityKey: string };
 
 

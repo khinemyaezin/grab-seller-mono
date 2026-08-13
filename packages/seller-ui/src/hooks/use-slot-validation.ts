@@ -7,7 +7,7 @@ import { ExtensionFieldErrors, ExtensionSlotName, PlatformEvents } from "@khinem
 const DEFAULT_VALIDATE_TIMEOUT_MS = 3000;
 
 export type SlotValidateResult = {
-  instanceId: string;
+  groupId: string;
   slotId: ExtensionSlotName;
   valid: boolean;
   value?: unknown;
@@ -27,30 +27,30 @@ function runValidation(
       return;
     }
 
-    const slotsById = new Map(slots.map((slot) => [slot.instanceId, slot]));
+    const slotsById = new Map(slots.map((slot) => [slot.groupId, slot]));
     const results = new Map<string, SlotValidateResult>();
     const timers = new Map<string, number>();
     let settled = 0;
 
-    const settle = (instanceId: string, result: SlotValidateResult) => {
-      if (results.has(instanceId)) return;
-      results.set(instanceId, result);
-      const timer = timers.get(instanceId);
+    const settle = (groupId: string, result: SlotValidateResult) => {
+      if (results.has(groupId)) return;
+      results.set(groupId, result);
+      const timer = timers.get(groupId);
       if (timer) window.clearTimeout(timer);
-      timers.delete(instanceId);
+      timers.delete(groupId);
       settled += 1;
       if (settled === slots.length) {
         unsubscribe();
-        resolve(slots.map((slot) => results.get(slot.instanceId)!));
+        resolve(slots.map((slot) => results.get(slot.groupId)!));
       }
     };
 
     const unsubscribe = events.subscribe("extension:validated:v1", (msg) => {
       if (!msg.producerId) return;
-      const slot = slotsById.get(msg.instanceId);
+      const slot = slotsById.get(msg.groupId);
       if (!slot) return;
-      settle(msg.instanceId, {
-        instanceId: msg.instanceId,
+      settle(msg.groupId, {
+        groupId: msg.groupId,
         slotId: slot.slotId,
         valid: msg.valid,
         value: msg.payload,
@@ -59,9 +59,9 @@ function runValidation(
     }, { replay: false });
 
     for (const slot of slots) {
-      timers.set(slot.instanceId, window.setTimeout(() => {
-        settle(slot.instanceId, {
-          instanceId: slot.instanceId,
+      timers.set(slot.groupId, window.setTimeout(() => {
+        settle(slot.groupId, {
+          groupId: slot.groupId,
           slotId: slot.slotId,
           valid: false,
         });
@@ -69,7 +69,7 @@ function runValidation(
 
       events.emit("extension:validate:v1", {
         producerId: "host",
-        instanceId: slot.instanceId,
+        groupId: slot.groupId,
         slotId: slot.slotId,
       });
     }
@@ -126,7 +126,7 @@ export function useValidateAllSlots(
   const errors = useMemo<SlotValidationErrors>(() => {
     const map: SlotValidationErrors = {};
     for (const result of results) {
-      if (!result.valid && result.errors) map[result.instanceId] = result.errors;
+      if (!result.valid && result.errors) map[result.groupId] = result.errors;
     }
     return map;
   }, [results]);

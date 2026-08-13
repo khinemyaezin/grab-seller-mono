@@ -9,7 +9,7 @@ import {
 } from "react";
 
 export type RegisteredSlot = {
-  instanceId: string;
+  groupId: string;
   slotId: ExtensionSlotName;
 };
 
@@ -35,9 +35,9 @@ export function SlotProvider({ children }: SlotProviderProps) {
   const slotsRef = useRef(new Map<string, RegisteredSlot>());
 
   const register = useCallback((slot: RegisteredSlot) => {
-    slotsRef.current.set(slot.instanceId, slot);
+    slotsRef.current.set(slot.groupId, slot);
     return () => {
-      slotsRef.current.delete(slot.instanceId);
+      slotsRef.current.delete(slot.groupId);
     };
   }, []);
 

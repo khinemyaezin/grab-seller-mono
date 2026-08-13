@@ -15,7 +15,7 @@ export type ProductExtensionSlotName =
 export type ExtensionSlotName = ProductExtensionSlotName;
 
 export type SlotValidateResult = {
-  instanceId: string;
+  groupId: string;
   slotId: ExtensionSlotName;
   valid: boolean;
   value?: unknown;
@@ -25,7 +25,7 @@ export type SlotValidateResult = {
 export type SlotValidationErrors = Record<string, ExtensionFieldErrors>;
 
 export type SlotEntry<TPayload = unknown> = {
-  instanceId: string;
+  groupId: string;
   domain: string;
   payload: TPayload;
 };

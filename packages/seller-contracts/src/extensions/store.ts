@@ -16,8 +16,8 @@ export type ExtensionSyncStore<ProjectionType> = {
 
   subscribe: (listener: () => void) => () => void;
   getSnapshot: () => ReadonlyMap<string, SlotEntry>;
-  getEntry: (instanceId: string) => SlotEntry | undefined;
+  getEntry: (groupId: string) => SlotEntry | undefined;
   setPayload: (entry: SlotEntry) => void;
-  prune: (domain: string, liveInstanceIds: ReadonlySet<string>) => string[];
+  prune: (domain: string, liveGroupIds: ReadonlySet<string>) => string[];
   clearDomain: (domain: string) => void;
 };

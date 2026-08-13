@@ -11,7 +11,7 @@ export type ExtensionEntryLink = {
 };
 
 export type ExtensionMountProps = {
-  instanceId: string;
+  groupId: string;
   slotId?: string;
   context?: Record<string, unknown>;
   platform?: SellerPlatform;

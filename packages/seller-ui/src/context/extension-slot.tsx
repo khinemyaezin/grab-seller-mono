@@ -22,12 +22,12 @@ export function ExtensionSlot({
   const Component = useExtension(name) as ComponentType<any> | undefined;
   const { register } = useSlotProvider();
 
-  const instanceId = props?.instanceId as string | undefined;
+  const groupId = props?.groupId as string | undefined;
 
   useEffect(() => {
-    if (!instanceId || !Component) return;
-    return register({ instanceId, slotId: name });
-  }, [register, instanceId, name, Component]);
+    if (!groupId || !Component) return;
+    return register({ groupId, slotId: name });
+  }, [register, groupId, name, Component]);
 
   if (!Component) return <>{fallback}</>;
 

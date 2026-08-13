@@ -1,6 +1,6 @@
 export type EventBusMeta = {
   producerId: string;
-  instanceId: string;
+  groupId: string;
   entityKey?: string;
   sequence?: number;
   slotId?: string;
