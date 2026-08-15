@@ -1,13 +1,10 @@
 export type InventoryCreateContext = {
-  sku?: string;
+  sku: string;
 };
 
-export const InventoryPayloadSchema = {
+export const InventoryLocationStockSchema = {
   type: "object" as const,
   properties: {
-    sku: {
-      type: "string" as const,
-    },
     locationId: {
       type: "string" as const,
       minLength: 1,
@@ -36,9 +33,32 @@ export const InventoryPayloadSchema = {
   additionalProperties: false,
 };
 
-export type InventoryPayload = {
-  sku: string;
+export const InventoryPayloadSchema = {
+  type: "object" as const,
+  properties: {
+    sku: {
+      type: "string" as const,
+    },
+    locations: {
+      type: "array" as const,
+      minItems: 1,
+      items: InventoryLocationStockSchema,
+      errorMessage: {
+        minItems: "At least one location is required",
+      },
+    },
+  },
+  required: ["locations"],
+  additionalProperties: false,
+};
+
+export type InventoryLocationStock = {
   locationId: string;
   initialQuantity: number;
-  safetyStock?: number;
+  safetyStock: number;
+};
+
+export type InventoryPayload = {
+  sku: string;
+  locations: InventoryLocationStock[];
 };

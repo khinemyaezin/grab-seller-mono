@@ -18,7 +18,7 @@ export type SlotProviderApi = {
   list: () => RegisteredSlot[];
 };
 
-const noopUnregister = () => {};
+const noopUnregister = () => { };
 
 const defaultApi: SlotProviderApi = {
   register: () => noopUnregister,
@@ -35,10 +35,12 @@ export function SlotProvider({ children }: SlotProviderProps) {
   const slotsRef = useRef(new Map<string, RegisteredSlot>());
 
   const register = useCallback((slot: RegisteredSlot) => {
-    slotsRef.current.set(slot.groupId, slot);
+    const key = `${slot.groupId}::${slot.slotId}`;
+    slotsRef.current.set(key, slot);
     return () => {
-      slotsRef.current.delete(slot.groupId);
+      slotsRef.current.delete(key);
     };
+
   }, []);
 
   const list = useCallback(() => Array.from(slotsRef.current.values()), []);

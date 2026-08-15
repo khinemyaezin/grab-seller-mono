@@ -1,4 +1,4 @@
-import { InventoryPayload, PricingPayload } from "../schemas";
+import { InventoryCreateContext, InventoryPayload, PricingCreateContext, PricingPayload } from "../schemas";
 import { EventBusMeta, EventEnvelope, ExtensionFieldErrors } from "./core";
 
 export type ToastType = "success" | "error" | "info" | "warning";
@@ -32,10 +32,10 @@ export type FormSavedPayload = EventBusMeta & {
 };
 
 export type StateEventPayloads = {
-    "extension:pricing:hydrate:v1": EventEnvelope<unknown>;
-    "extension:pricing:updated:v1": EventEnvelope<PricingPayload>;
-    "extension:inventory:hydrate:v1": EventEnvelope<unknown>;
-    "extension:inventory:updated:v1": EventEnvelope<InventoryPayload>;
+    "extension:pricing:new:hydrate:v1": EventEnvelope<PricingCreateContext>;
+    "extension:pricing:new:updated:v1": EventEnvelope<PricingPayload>;
+    "extension:inventory:new:hydrate:v1": EventEnvelope<InventoryCreateContext>;
+    "extension:inventory:new:updated:v1": EventEnvelope<InventoryPayload>;
     "form:dirty:v1": EventEnvelope<FormDirtyPayload>;
 }
 

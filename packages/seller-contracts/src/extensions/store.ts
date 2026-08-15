@@ -1,13 +1,16 @@
+import { ExtensionFieldErrors } from "../events";
 import { SlotEntry, SlotValidateResult } from "./slots";
 
 export type DomainSubmitContract<ProjectionType> = {
-  absorb: (results: SlotValidateResult[]) => void;
+  sync: (results: SlotValidateResult[]) => void;
   project: () => ProjectionType;
+  getErrors:(results: SlotValidateResult[]) => SlotValidateResult[];
 };
 
 export type DomainSubmitResult<ProjectionType> = {
   domains: string[];
   contributions: ProjectionType;
+  errors: ExtensionFieldErrors
 };
 
 export type ExtensionSyncStore<ProjectionType> = {
