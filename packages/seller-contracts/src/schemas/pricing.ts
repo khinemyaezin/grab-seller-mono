@@ -1,5 +1,5 @@
 export type PricingCreateContext = {
-  sku?: string;
+  sku: string;
 };
 
 export const PricingPayloadSchema = {
