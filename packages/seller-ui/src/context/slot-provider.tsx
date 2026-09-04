@@ -54,5 +54,9 @@ export function SlotProvider({ children }: SlotProviderProps) {
 }
 
 export function useSlotProvider(): SlotProviderApi {
-  return useContext(SlotProviderContext) ?? defaultApi;
+  const context = useContext(SlotProviderContext);
+    if (!context) {
+    throw new Error("Slot provider must be used");
+  }
+  return context;
 }
