@@ -6,7 +6,9 @@ export const PRODUCT_EXTENSION_SLOTS = {
   CREATE_INVENTORY: "product.create.inventory",
   CREATE_INVENTORY_INLINE: "product.create.inventory.inline",
   EDIT_PRICING: "product.edit.pricing",
+  EDIT_PRICING_INLINE: "product.edit.pricing.inline",
   EDIT_INVENTORY: "product.edit.inventory",
+  EDIT_INVENTORY_INLINE: "product.edit.inventory.inline",
 } as const;
 
 export type ProductExtensionSlotName =

@@ -1,4 +1,13 @@
-import { InventoryCreateContext, InventoryPayload, PricingCreateContext, PricingPayload } from "../schemas";
+import {
+    InventoryCreateContext,
+    InventoryEditContext,
+    InventoryEditPayload,
+    InventoryPayload,
+    PricingCreateContext,
+    PricingEditContext,
+    PricingEditPayload,
+    PricingPayload,
+} from "../schemas";
 import { EventBusMeta, EventEnvelope, ExtensionFieldErrors } from "./core";
 
 export type ToastType = "success" | "error" | "info" | "warning";
@@ -32,11 +41,15 @@ export type FormSavedPayload = EventBusMeta & {
 };
 
 export type StateEventPayloads = {
+    "form:dirty:v1": EventEnvelope<FormDirtyPayload>;
     "extension:pricing:new:hydrate:v1": EventEnvelope<PricingCreateContext>;
     "extension:pricing:new:updated:v1": EventEnvelope<PricingPayload>;
+    "extension:pricing:edit:hydrate:v1": EventEnvelope<PricingEditContext>;
+    "extension:pricing:edit:updated:v1": EventEnvelope<PricingEditPayload>;
     "extension:inventory:new:hydrate:v1": EventEnvelope<InventoryCreateContext>;
     "extension:inventory:new:updated:v1": EventEnvelope<InventoryPayload>;
-    "form:dirty:v1": EventEnvelope<FormDirtyPayload>;
+    "extension:inventory:edit:hydrate:v1": EventEnvelope<InventoryEditContext>;
+    "extension:inventory:edit:updated:v1": EventEnvelope<InventoryEditPayload>;
 }
 
 export type SignalEventPayloads = {
