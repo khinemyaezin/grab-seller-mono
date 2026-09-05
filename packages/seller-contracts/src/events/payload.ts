@@ -9,6 +9,7 @@ import {
     PricingPayload,
 } from "../schemas";
 import { EventBusMeta, EventEnvelope, ExtensionFieldErrors } from "./core";
+import { StreamDisconnectedV1, StreamReadyV1, WorkflowUpdatedV1 } from "./sse";
 
 export type ToastType = "success" | "error" | "info" | "warning";
 
@@ -69,6 +70,10 @@ export type SignalEventPayloads = {
     "form:save:v1": EventBusMeta;
     "form:discard:v1": EventBusMeta;
     "form:saved:v1": FormSavedPayload;
+
+    "stream:ready:v1": StreamReadyV1;
+    "stream:disconnected:v1": StreamDisconnectedV1;
+    "workflow:updated:v1": WorkflowUpdatedV1;
 }
 
 export type EventPayloads = StateEventPayloads & SignalEventPayloads;
