@@ -14,6 +14,6 @@ export type WorkflowUpdatedV1 = {
     workflowId: string;
     workflowName: string;
     status: string;
-    productId?: string;
+    idempotencyKey?: string;
     errorMessage?: string;
 };
