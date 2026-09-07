@@ -4,4 +4,4 @@
 "@khinemyaezin/seller-api": patch
 ---
 
-slot bridge
+Replace same-tree slot hydrate/validate event RPC with a SlotHandle registry and props-based drafts.
