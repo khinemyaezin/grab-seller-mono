@@ -14,6 +14,7 @@ export function useRegisterSlotHandle<TValue>(
     return registerHandle({
       validate: () => adaptWidgetValidate(ref.current?.validate()),
       getValues: () => ref.current!.getValues(),
+      reset: () => ref.current?.reset?.(),
     });
   }, [ref, registerHandle]);
 }

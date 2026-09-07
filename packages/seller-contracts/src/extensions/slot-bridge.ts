@@ -14,6 +14,7 @@ export type WidgetValidateResult<TValue> = {
 export type SlotWidgetHandle<TValue> = {
   validate: () => Promise<WidgetValidateResult<TValue>>;
   getValues: () => TValue;
+  reset?: () => void;
 };
 
 export function mergeFromHydrate<T extends object>(
