@@ -14,6 +14,7 @@ export { matchShellBreadcrumbs } from "./lib/breadcrumbs.js";
 export { ContextBar, type ContextBarProps } from "./components/layout/context-bar.js";
 export { useContextBar, type UseContextBarOptions } from "./hooks/use-context-bar.js";
 export { useRegisterSlotHandle } from "./hooks/use-register-slot-handle.js";
+export { useResetAllSlots } from "./hooks/use-slot-reset.js";
 export {
   mergeFromHydrate,
   adaptWidgetValidate,
