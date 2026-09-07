@@ -1,13 +1,13 @@
 import {
   Component,
   Suspense,
-  useEffect,
+  useCallback,
   type ComponentType,
   type ReactNode,
   type ErrorInfo,
 } from "react";
 import { useExtension } from "./extension-registry";
-import { ExtensionSlotName } from "@khinemyaezin/seller-contracts";
+import { ExtensionSlotName, type SlotHandle } from "@khinemyaezin/seller-contracts";
 import { useSlotProvider } from "./slot-provider";
 
 export type ExtensionSlotProps = {
@@ -47,17 +47,17 @@ export function ExtensionSlot({
 
   const groupId = props?.groupId as string | undefined;
 
-  useEffect(() => {
-    if (!groupId || !ExtensionComponent) return;
-    return register({ groupId, slotId: name });
-  }, [register, groupId, name, ExtensionComponent]);
+  const registerHandle = useCallback((handle: SlotHandle) => {
+    if (!groupId) return;
+    return register({ groupId, slotId: name, handle });
+  }, [groupId, name, register]);
 
   if (!ExtensionComponent) return <>{fallback}</>;
 
   return (
     <ExtensionErrorBoundary fallback={fallback}>
       <Suspense fallback={fallback}>
-        <ExtensionComponent {...props} slotId={name} />
+        <ExtensionComponent {...props} slotId={name} registerHandle={registerHandle} />
       </Suspense>
     </ExtensionErrorBoundary>
   );

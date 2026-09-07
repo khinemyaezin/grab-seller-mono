@@ -1,4 +1,4 @@
-import { ExtensionSlotName } from "@khinemyaezin/seller-contracts";
+import { ExtensionSlotName, type SlotHandle } from "@khinemyaezin/seller-contracts";
 import {
   createContext,
   useCallback,
@@ -11,6 +11,7 @@ import {
 export type RegisteredSlot = {
   groupId: string;
   slotId: ExtensionSlotName;
+  handle?: SlotHandle;
 };
 
 export type SlotProviderApi = {
@@ -40,7 +41,6 @@ export function SlotProvider({ children }: SlotProviderProps) {
     return () => {
       slotsRef.current.delete(key);
     };
-
   }, []);
 
   const list = useCallback(() => Array.from(slotsRef.current.values()), []);
@@ -55,7 +55,7 @@ export function SlotProvider({ children }: SlotProviderProps) {
 
 export function useSlotProvider(): SlotProviderApi {
   const context = useContext(SlotProviderContext);
-    if (!context) {
+  if (!context) {
     throw new Error("Slot provider must be used");
   }
   return context;
