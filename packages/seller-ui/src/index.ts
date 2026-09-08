@@ -15,10 +15,14 @@ export { ContextBar, type ContextBarProps } from "./components/layout/context-ba
 export { useContextBar, type UseContextBarOptions } from "./hooks/use-context-bar.js";
 export { useRegisterSlotHandle } from "./hooks/use-register-slot-handle.js";
 export { useResetAllSlots } from "./hooks/use-slot-reset.js";
+export { createExposedSlot } from "./factories/create-exposed-slot.js";
+export { useSlotChangeEmitter } from "./hooks/use-slot-change-emitter.js";
 export {
   mergeFromHydrate,
   adaptWidgetValidate,
   type SlotHandle,
   type SlotWidgetHandle,
+  type SlotWidgetProps,
+  type SlotValueSource,
   type WidgetValidateResult,
 } from "@khinemyaezin/seller-contracts";

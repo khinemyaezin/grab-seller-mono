@@ -17,6 +17,11 @@ export type SlotWidgetHandle<TValue> = {
   reset?: () => void;
 };
 
+export type SlotValueSource<TValue> = {
+  getValues: () => TValue;
+  subscribe: (onFieldChange: (name?: string) => void) => () => void;
+};
+
 export function mergeFromHydrate<T extends object>(
   prev: T | undefined,
   current: T | undefined,

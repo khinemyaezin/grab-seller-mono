@@ -21,3 +21,12 @@ export type ExtensionMountProps = {
   platform?: SellerPlatform;
   entryLink?: ExtensionEntryLink;
 };
+
+export type SlotWidgetProps<TContext, TPayload> = {
+  groupId: string;
+  slotId: string;
+  context?: TContext;
+  initialValue?: TPayload;
+  onChange: (value: TPayload) => void;
+  registerHandle?: (handle: SlotHandle<TPayload>) => void | (() => void);
+};
