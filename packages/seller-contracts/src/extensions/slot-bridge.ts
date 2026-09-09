@@ -22,14 +22,6 @@ export type SlotValueSource<TValue> = {
   subscribe: (onFieldChange: (name?: string) => void) => () => void;
 };
 
-export function mergeFromHydrate<T extends object>(
-  prev: T | undefined,
-  current: T | undefined,
-  context: Partial<T> | undefined,
-): T {
-  return { ...prev, ...current, ...context } as T;
-}
-
 export async function adaptWidgetValidate<TValue>(
   result: Promise<WidgetValidateResult<TValue>> | undefined,
 ): Promise<{ valid: boolean; value?: TValue; errors?: Record<string, string> }> {
