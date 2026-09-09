@@ -18,7 +18,6 @@ export { useResetAllSlots } from "./hooks/use-slot-reset.js";
 export { createExposedSlot } from "./factories/create-exposed-slot.js";
 export { useSlotChangeEmitter } from "./hooks/use-slot-change-emitter.js";
 export {
-  mergeFromHydrate,
   adaptWidgetValidate,
   type SlotHandle,
   type SlotWidgetHandle,
