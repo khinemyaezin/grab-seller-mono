@@ -31,6 +31,7 @@
     "@fontsource-variable/inter": "^5.2.8",
     "@hookform/resolvers": "^5.4.0",
     "@khinemyaezin/seller-api": "1.0.0",
+    "@khinemyaezin/seller-contracts": "1.0.0",
     "@radix-ui/react-avatar": "^1.2.0",
     "@radix-ui/react-dialog": "^1.1.17",
     "@radix-ui/react-radio-group": "^1.4.1",

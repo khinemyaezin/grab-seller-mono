@@ -19,6 +19,7 @@ export function createExposedSlot<TContext, TPayload>(
   return function ExposedSlot({
     groupId,
     slotId = config.defaultSlotId,
+    variant,
     context,
     initialValue,
     onChange,
@@ -40,6 +41,7 @@ export function createExposedSlot<TContext, TPayload>(
           <Widget
             groupId={groupId}
             slotId={slotId}
+            variant={variant}
             context={context as TContext | undefined}
             initialValue={initialValue as TPayload | undefined}
             onChange={stableOnChange}

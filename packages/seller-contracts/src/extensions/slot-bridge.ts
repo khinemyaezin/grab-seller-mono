@@ -1,9 +1,25 @@
 import type { ExtensionFieldErrors } from "../events/core.js";
 
+export type SlotPresentationVariant = "full" | "inline";
+
+export type SlotDeclaration = {
+  groupId: string;
+  slotId: string;
+  optional?: boolean;
+};
+
+export type SlotContribution = {
+  slice: string;
+  append: unknown[];
+};
+
 export type SlotHandle<TValue = unknown, TErrors = ExtensionFieldErrors> = {
-  validate: () => Promise<{ valid: boolean; value?: TValue; errors?: TErrors }>;
+  validate: (
+    signal?: AbortSignal,
+  ) => Promise<{ valid: boolean; value?: TValue; errors?: TErrors }>;
   getValues: () => TValue;
   reset?: () => void;
+  project?: () => SlotContribution[];
 };
 
 export type WidgetValidateResult<TValue> = {
@@ -12,9 +28,10 @@ export type WidgetValidateResult<TValue> = {
 };
 
 export type SlotWidgetHandle<TValue> = {
-  validate: () => Promise<WidgetValidateResult<TValue>>;
+  validate: (signal?: AbortSignal) => Promise<WidgetValidateResult<TValue>>;
   getValues: () => TValue;
   reset?: () => void;
+  project?: () => SlotContribution[];
 };
 
 export type SlotValueSource<TValue> = {
