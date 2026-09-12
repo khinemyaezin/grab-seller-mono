@@ -1,20 +1,15 @@
 import { ExtensionFieldErrors } from "../events";
+import type { SlotContribution } from "./slot-bridge.js";
 
-export const PRODUCT_EXTENSION_SLOTS = {
-  CREATE_PRICING: "product.create.pricing",
-  CREATE_PRICING_INLINE: "product.create.pricing.inline",
-  CREATE_INVENTORY: "product.create.inventory",
-  CREATE_INVENTORY_INLINE: "product.create.inventory.inline",
-  EDIT_PRICING: "product.edit.pricing",
-  EDIT_PRICING_INLINE: "product.edit.pricing.inline",
-  EDIT_INVENTORY: "product.edit.inventory",
-  EDIT_INVENTORY_INLINE: "product.edit.inventory.inline",
-} as const;
+export type ExtensionSlotName = string;
 
-export type ProductExtensionSlotName =
-  (typeof PRODUCT_EXTENSION_SLOTS)[keyof typeof PRODUCT_EXTENSION_SLOTS];
+export const SLOT_UNAVAILABLE_ERROR = "_slot";
+export const SLOT_UNAVAILABLE_MESSAGE = "Extension slot is unavailable";
+export const SLOT_VALIDATE_TIMEOUT_MESSAGE = "Extension slot timed out";
 
-export type ExtensionSlotName = ProductExtensionSlotName;
+export function slotErrorKey(groupId: string, slotId: string): string {
+  return `${groupId}::${slotId}`;
+}
 
 export type SlotValidateResult = {
   groupId: string;
@@ -22,6 +17,7 @@ export type SlotValidateResult = {
   valid: boolean;
   value?: unknown;
   errors?: ExtensionFieldErrors;
+  contributions?: SlotContribution[];
 };
 
 export type SlotValidationErrors = Record<string, ExtensionFieldErrors>;

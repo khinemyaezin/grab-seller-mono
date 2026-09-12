@@ -1,5 +1,5 @@
 import type { SellerPlatform } from "../auth.js";
-import type { SlotHandle } from "./slot-bridge.js";
+import type { SlotHandle, SlotPresentationVariant } from "./slot-bridge.js";
 
 export type ExtensionSlotContract = {
   id: string;
@@ -14,6 +14,7 @@ export type ExtensionEntryLink = {
 export type ExtensionMountProps = {
   groupId: string;
   slotId?: string;
+  variant?: SlotPresentationVariant;
   context?: Record<string, unknown>;
   initialValue?: unknown;
   onChange?: (value: unknown) => void;
@@ -25,6 +26,7 @@ export type ExtensionMountProps = {
 export type SlotWidgetProps<TContext, TPayload> = {
   groupId: string;
   slotId: string;
+  variant?: SlotPresentationVariant;
   context?: TContext;
   initialValue?: TPayload;
   onChange: (value: TPayload) => void;

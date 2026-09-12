@@ -12,9 +12,10 @@ export function useRegisterSlotHandle<TValue>(
   useLayoutEffect(() => {
     if (!registerHandle) return;
     return registerHandle({
-      validate: () => adaptWidgetValidate(ref.current?.validate()),
+      validate: (signal) => adaptWidgetValidate(ref.current?.validate(signal)),
       getValues: () => ref.current!.getValues(),
       reset: () => ref.current?.reset?.(),
+      project: () => ref.current?.project?.() ?? [],
     });
   }, [ref, registerHandle]);
 }
