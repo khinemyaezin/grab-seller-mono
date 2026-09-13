@@ -21,6 +21,7 @@ export * from "./page-loading-skeleton";
 export * from "./pager";
 export * from "./pagination";
 export * from "./popover";
+export * from "./query-state";
 export * from "./radio-group";
 export * from "./select";
 export * from "./separator";
