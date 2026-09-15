@@ -17,6 +17,7 @@ export * from "./input-group";
 export * from "./item";
 export * from "./label";
 export * from "./magic-search";
+export * from "./media-gallery";
 export * from "./page-loading-skeleton";
 export * from "./pager";
 export * from "./pagination";
