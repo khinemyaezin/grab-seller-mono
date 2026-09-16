@@ -18,7 +18,11 @@ export const routeTree: RouteNode[] = [
             path: ":productId",
             label: "Edit Product",
             children: [
-              { path: "variants/:variantId", label: "Edit Variant" },
+              {
+                path: "variants",
+                label: "Variants",
+                children: [{ path: ":variantId", label: "Edit Variant" }],
+              },
             ],
           },
         ],
