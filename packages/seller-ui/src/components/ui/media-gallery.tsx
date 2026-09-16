@@ -167,6 +167,83 @@ export function revokeMediaGalleryUrl(item: MediaGalleryItem): void {
   }
 }
 
+export function isMediaGalleryDirty(
+  items: MediaGalleryItem[],
+  seed: MediaGalleryItem[] = [],
+): boolean {
+  if (items.some((item) => item.file)) return true
+  if (items.length !== seed.length) return true
+  return items.some((item, index) => {
+    const previous = seed[index]
+    return (
+      item.id !== previous?.id ||
+      item.rank !== previous?.rank ||
+      item.storageKey !== previous?.storageKey
+    )
+  })
+}
+
+export type MediaAttachmentPayload = {
+  id?: string
+  storageKey: string
+  contentType: string
+  rank: number
+}
+
+export function formatMediaReplacements(
+  items: MediaGalleryItem[],
+): MediaAttachmentPayload[] {
+  return [...items]
+    .sort((left, right) => left.rank - right.rank)
+    .map((item) => {
+      if (!item.storageKey) {
+        throw new Error("Missing storage key for media item")
+      }
+
+      return {
+        ...(item.file ? {} : { id: item.id }),
+        storageKey: item.storageKey,
+        contentType: item.contentType,
+        rank: item.rank,
+      }
+    })
+}
+
+export function extractMediaFileName(storageKey?: string, fallback = "Media"): string {
+  if (!storageKey) {
+    return fallback
+  }
+  const slash = storageKey.lastIndexOf("/")
+  const name = slash >= 0 ? storageKey.slice(slash + 1) : storageKey
+  return name || fallback
+}
+
+export type RemoteMediaSource = {
+  id: string
+  url: string
+  contentType: string
+  rank: number
+  storageKey?: string
+  name?: string
+  sizeBytes?: number
+}
+
+export function toMediaGalleryItems<T extends RemoteMediaSource>(
+  medias: T[] | null | undefined,
+): MediaGalleryItem[] {
+  return (medias ?? []).map((media) => ({
+    id: media.id,
+    url: media.url,
+    contentType: media.contentType,
+    rank: media.rank,
+    storageKey: media.storageKey,
+    name: media.name ?? extractMediaFileName(media.storageKey),
+    sizeBytes: media.sizeBytes,
+    status: "done" as const,
+  }))
+}
+
+
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`
   if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`
