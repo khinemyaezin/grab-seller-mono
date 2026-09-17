@@ -76,6 +76,14 @@ export const routeTree: RouteNode[] = [
           },
         ],
       },
+      {
+        path: "storefronts",
+        label: "Storefronts",
+        children: [
+          { path: "new", label: "New Storefront" },
+          { path: ":storefrontId", label: "Edit Storefront" },
+        ],
+      },
       { path: "login", label: "Login" },
       { path: "register", label: "Register" },
       { path: "contexts", label: "Contexts" },
@@ -99,6 +107,11 @@ export const routes = {
   editProduct: (id: string) => `products/${id}`,
   editProductVariant: (productId: string, variantId: string) =>
     `products/${productId}/variants/${variantId}`,
+
+  // Storefronts
+  storefronts: "storefronts",
+  newStorefront: "storefronts/new",
+  editStorefront: (id: string) => `storefronts/${id}`,
 
   // Inventory
   inventory: "inventory",
