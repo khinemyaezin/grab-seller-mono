@@ -7,6 +7,7 @@ export const ModuleDiscovery = {
     "inventory": ref.ROOT_INVENTORY,
     "pricing": ref.ROOT_PRICING,
     "workflows": ref.ROOT_WORKFLOWS,
+    "salesChannel": ref.ROOT_SALES_CHANNEL,
 } as const; 
 export type ModuleDiscoveryType = typeof ModuleDiscovery;
 export type ModuleName = keyof ModuleDiscoveryType; 
