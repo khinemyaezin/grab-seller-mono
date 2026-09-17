@@ -5,4 +5,5 @@ export const ref = {
     ROOT_INVENTORY: "get-inventory-root",
     ROOT_PRICING: "get-pricing-root",
     ROOT_WORKFLOWS: "get-workflows-root",
+    ROOT_SALES_CHANNEL: "get-sales-channel-root",
 } as const;
